@@ -996,11 +996,13 @@ function initProgram() {
             .map((show) => {
               const formatClass =
                 show.format === "4DX 2D" ? " is-4dx" : show.format === "3D" ? " is-3d" : "";
+              const badge = getFormatBadge(show);
               const info = show.venue + " · Sál " + show.hall + " · " + show.format + " · " + show.language;
+              const label = show.time + " " + badge + " – " + movie.title + " (" + show.venue + ", sál " + show.hall + ")";
               return `
-                <a class="time-chip${formatClass}" href="rezervace.html?show=${show.id}" title="${escapeHtml(info)}">
+                <a class="time-chip${formatClass}" href="rezervace.html?show=${show.id}" title="${escapeHtml(info)}" aria-label="${escapeHtml(label)}">
                   <span>${show.time}</span>
-                  <small>${getFormatBadge(show)}</small>
+                  <small>${badge}</small>
                 </a>
               `;
             })
